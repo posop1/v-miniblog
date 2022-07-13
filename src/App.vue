@@ -1,36 +1,28 @@
 <template>
   <div class="app">
     <div class="container inner">
-      <form @submit.prevent>
-        <h4>Создание поста</h4>
-        <input 
-          v-model="title" 
-          class="input" 
-          type="text" 
-          placeholder="Введите название поста."
-        >
-        <input 
-          v-model="body" 
-          class="input" 
-          type="text" 
-          placeholder="Введите описание поста."
-        >
-        <button @click="createPost">Создать пост</button>
-      </form>
-      <div class="post" v-for="post in posts" v-bind:key = 'post.id'>
-        <div><strong>Название:</strong>  {{ post.title }}</div>
-        <div><strong>Описание:</strong> {{ post.body }}</div>
-      </div>  
+      <post-form 
+        @create='createPost'
+      />
+      <post-list 
+        :posts="posts"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import PostForm from './components/PostForm'
+import PostList from './components/PostList'
+
 export default {
+  components: {
+    PostForm,
+    PostList
+  },
+
   data() {
     return {
-      title: '',
-      body: '',
       posts: [
         {id: 1, title: 'Пост о JS', body: 'JavaScript мультипарадигменный язык'},
         {id: 2, title: 'Пост о JS 2', body: 'JavaScript мультипарадигменный язык'},
@@ -41,16 +33,10 @@ export default {
       ]
     }
   },
+
   methods: {
-    createPost(){
-      const newPost = {
-        id: Date.now(),
-        title: this.title,
-        body: this.body 
-      }
-      this.posts.push(newPost)
-      this.title = ''
-      this.body = ''
+    createPost(post){
+      this.posts.push(post)
     }
   }
 }
@@ -113,51 +99,5 @@ export default {
     display: flex;
     flex-direction: column;
   }
-  .post{
-    padding: 15px;
-    border: 2px solid whitesmoke;
-    border-radius: 10px;
-    color: white;
-    margin-bottom: 25px;
-    font-size: 18px;
-  }
-  form{
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
-    border: 2px solid whitesmoke;
-    border-radius: 10px;
-    margin: 50px 0px;
-  }
-  form h4{
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  .input{
-    max-width: 400px;
-    outline: none;
-    border: none;
-    margin-bottom: 15px;
-    padding: 8px;
-    font-size: 14px;
-    background: whitesmoke;
-    font-family: 'Roboto', sans-serif;
-    border-radius: 2px;
-  }
-  button{
-    font-family: 'Roboto', sans-serif;
-    max-width: 200px;
-    border: none;
-    outline: none;
-    background: white;
-    cursor: pointer;
-    font-size: 16px;
-    padding: 8px;
-    border-radius: 10px;
-    transition: 0.3s;
-  }
-  button:hover{
-    background: rgba(255, 255, 255, 0.13);
-    color: white;
-  }
+  
 </style>
