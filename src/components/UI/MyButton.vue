@@ -17,6 +17,7 @@ button {
   border: none;
   outline: none;
   background: white;
+  border: 1px solid black;
   cursor: pointer;
   font-size: 16px;
   padding: 8px;
@@ -24,7 +25,7 @@ button {
   transition: 0.3s;
 }
 button:hover {
-  background: rgba(255, 255, 255, 0.13);
-  color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2), 0 4px 6px rgba(0,0,0,0.2);
+  background: rgba(255, 255, 255, 0.5);
 }
 </style>

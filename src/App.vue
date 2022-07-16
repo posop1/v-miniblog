@@ -1,9 +1,13 @@
 <template>
   <div class="app">
     <div class="container inner">
-      <post-form 
-        @create='createPost'
-      />
+      <h1>Страница с постами</h1>
+      <my-button class="createPost" @click='openDialog'>Создать пост</my-button>
+      <my-dialog v-model:open='dialogVisible'>
+        <post-form 
+          @create='createPost'
+        />
+      </my-dialog>
       <post-list 
         :posts="posts"
         @remove="removePost"
@@ -31,16 +35,21 @@ export default {
         {id: 4, title: 'Пост о JS 4', body: 'JavaScript мультипарадигменный язык'},
         {id: 5, title: 'Пост о JS 5', body: 'JavaScript мультипарадигменный язык'},
         {id: 6, title: 'Пост о JS 6', body: 'JavaScript мультипарадигменный язык'}
-      ]
+      ],
+      dialogVisible: false,
     }
   },
 
   methods: {
     createPost(post){
       this.posts.push(post)
+      this.dialogVisible = false
     },
     removePost(post){
       this.posts = this.posts.filter(p => p.id !== post.id)
+    },
+    openDialog() {
+      this.dialogVisible = true
     }
   }
 }
@@ -103,5 +112,11 @@ export default {
     display: flex;
     flex-direction: column;
   }
-  
+  h1{
+    font-size: 45px;
+    margin: 30px 0;
+  }
+  .createPost{
+    margin-bottom: 30px;
+  }
 </style>

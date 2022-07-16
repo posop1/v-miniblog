@@ -11,7 +11,7 @@
           type="text" 
           placeholder="Введите описание поста."
         />
-        <my-button @click="createPost">Создать пост</my-button>
+        <my-button class="btn" @click="createPost">Создать пост</my-button>
     </form>
 </template>
 
@@ -46,12 +46,14 @@ export default {
         padding: 15px;
         border: 2px solid whitesmoke;
         border-radius: 10px;
-        margin: 50px 0px;
     }
     form h4{
         font-size: 24px;
         margin-bottom: 20px;
+        color: black;
     }
-    
+    .btn{
+        align-self: flex-end;
+    }
     
 </style>
